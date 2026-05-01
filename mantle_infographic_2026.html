@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #060810;
+    --purple: #8B00FF;
+    --magenta: #FF00CC;
+    --cyan: #00F0FF;
+    --gold: #FFD700;
+    --white: #FFFFFF;
+    --navy: #0A0D1A;
+    --glow-purple: rgba(139,0,255,0.4);
+    --glow-cyan: rgba(0,240,255,0.35);
+    --glow-magenta: rgba(255,0,204,0.35);
+  }
+
+  body {
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 0;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .infographic {
+    width: 600px;
+    min-height: 1200px;
+    background: #060810;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(139,0,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,0,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .blob1 {
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 350px; height: 350px;
+    background: radial-gradient(ellipse, rgba(139,0,255,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none; z-index: 0;
+  }
+  .blob2 {
+    position: absolute;
+    top: 200px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(ellipse, rgba(0,240,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none; z-index: 0;
+  }
+  .blob3 {
+    position: absolute;
+    top: 700px; left: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(ellipse, rgba(255,0,204,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none; z-index: 0;
+  }
+  .blob4 {
+    position: absolute;
+    bottom: 200px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(ellipse, rgba(139,0,255,0.13) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none; z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    z-index: 2;
+    padding: 32px 36px 28px;
+    border-bottom: 1px solid rgba(139,0,255,0.2);
+  }
+
+  .hero-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+
+  .mantle-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mantle-mark {
+    width: 52px;
+    height: 52px;
+    animation: rotateMark 12s linear infinite;
+  }
+
+  @keyframes rotateMark {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .mantle-wordmark {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cat-hero-wrap {
+    position: relative;
+    width: 110px;
+    height: 110px;
+  }
+
+  .cat-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: top center;
+    border-radius: 8px;
+    filter: drop-shadow(0 0 12px rgba(0,240,255,0.5)) drop-shadow(0 0 24px rgba(139,0,255,0.4));
+    animation: catFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes catFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .cat-glow-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,240,255,0.3);
+    animation: ringPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .badge {
+    position: absolute;
+    bottom: -4px; right: -4px;
+    background: linear-gradient(135deg, var(--purple), var(--magenta));
+    color: #fff;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 2px 6px;
+    border-radius: 20px;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .hero-title span.grad {
+    background: linear-gradient(90deg, #8B00FF, #FF00CC, #00F0FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 8px rgba(139,0,255,0.6));
+  }
+
+  .hero-subtitle {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .hero-subtitle strong { color: var(--cyan); }
+
+  .marathon-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(139,0,255,0.12);
+    border: 1px solid rgba(139,0,255,0.35);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .marathon-pill .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--magenta);
+    box-shadow: 0 0 6px var(--magenta);
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .section-divider {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 36px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139,0,255,0.4), rgba(0,240,255,0.4), transparent);
+  }
+
+  .divider-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--cyan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .metrics-section {
+    position: relative;
+    z-index: 2;
+    padding: 0 36px 24px;
+  }
+
+  .section-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-heading::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 14px;
+    background: linear-gradient(180deg, var(--purple), var(--magenta));
+    border-radius: 2px;
+  }
+
+  .growth-visual {
+    position: relative;
+    background: rgba(10,12,28,0.8);
+    border: 1px solid rgba(139,0,255,0.25);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+
+  .growth-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(139,0,255,0.05) 0%, transparent 60%);
+    border-radius: 16px;
+  }
+
+  .cat-arrow-scene {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    height: 90px;
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .arrow-trajectory {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 80px;
+    height: 60px;
+  }
+
+  .cat-on-arrow {
+    position: absolute;
+    right: 60px;
+    bottom: 18px;
+    width: 70px;
+    height: 70px;
+    z-index: 3;
+    animation: catRide 2.5s ease-in-out infinite;
+  }
+
+  .cat-on-arrow img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    filter: drop-shadow(0 0 10px rgba(0,240,255,0.6)) drop-shadow(0 4px 12px rgba(139,0,255,0.5));
+    transform: scaleX(-1);
+  }
+
+  @keyframes catRide {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-5px) rotate(2deg); }
+  }
+
+  .boost-label {
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    background: linear-gradient(135deg, var(--purple), var(--magenta));
+    color: #fff;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .arrow-svg { width: 100%; height: 60px; }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .metric-card {
+    background: rgba(8,10,24,0.9);
+    border: 1px solid rgba(139,0,255,0.2);
+    border-radius: 12px;
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .metric-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .metric-card.purple::after { background: linear-gradient(90deg, var(--purple), var(--magenta)); }
+  .metric-card.cyan::after { background: linear-gradient(90deg, var(--cyan), #0080FF); }
+  .metric-card.gold::after { background: linear-gradient(90deg, var(--gold), #FF8C00); }
+  .metric-card.magenta::after { background: linear-gradient(90deg, var(--magenta), var(--purple)); }
+
+  .metric-icon { font-size: 16px; margin-bottom: 6px; }
+
+  .metric-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .metric-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .metric-value.purple { color: #CC66FF; text-shadow: 0 0 12px rgba(139,0,255,0.7); }
+  .metric-value.cyan { color: var(--cyan); text-shadow: 0 0 12px rgba(0,240,255,0.7); }
+  .metric-value.gold { color: var(--gold); text-shadow: 0 0 12px rgba(255,215,0,0.7); }
+  .metric-value.magenta { color: #FF66E8; text-shadow: 0 0 12px rgba(255,0,204,0.7); }
+
+  .metric-sub { font-size: 9px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+  .metric-badge {
+    display: inline-block;
+    background: rgba(0,240,255,0.12);
+    border: 1px solid rgba(0,240,255,0.25);
+    color: var(--cyan);
+    font-size: 8px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 8px;
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .metric-badge.up { background: rgba(0,255,120,0.1); border-color: rgba(0,255,120,0.25); color: #00FF78; }
+
+  .pillars-section {
+    position: relative;
+    z-index: 2;
+    padding: 0 36px 24px;
+  }
+
+  .pillar-card {
+    background: rgba(8,10,24,0.85);
+    border: 1px solid rgba(139,0,255,0.18);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 14px 0 0 14px;
+  }
+
+  .pillar-card.arch::before { background: linear-gradient(180deg, var(--purple), var(--cyan)); }
+  .pillar-card.rwa::before { background: linear-gradient(180deg, var(--gold), var(--magenta)); }
+  .pillar-card.ai::before { background: linear-gradient(180deg, var(--cyan), var(--purple)); }
+
+  .pillar-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .pillar-icon-title { display: flex; align-items: center; gap: 10px; }
+
+  .pillar-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .pillar-icon.arch { background: rgba(139,0,255,0.15); border: 1px solid rgba(139,0,255,0.3); }
+  .pillar-icon.rwa { background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.25); }
+  .pillar-icon.ai-ic { background: rgba(0,240,255,0.1); border: 1px solid rgba(0,240,255,0.25); }
+
+  .pillar-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .pillar-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--cyan);
+    background: rgba(0,240,255,0.08);
+    border: 1px solid rgba(0,240,255,0.2);
+    padding: 2px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .pillar-tag.gold { color: var(--gold); background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.2); }
+  .pillar-tag.purple { color: #CC66FF; background: rgba(139,0,255,0.1); border-color: rgba(139,0,255,0.25); }
+
+  .pillar-desc {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.55;
+    margin-bottom: 8px;
+    margin-left: 46px;
+  }
+
+  .pillar-tagline {
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 46px;
+    letter-spacing: 0.02em;
+  }
+
+  .pillar-tagline.purple { color: #AA44FF; }
+  .pillar-tagline.gold { color: var(--gold); }
+  .pillar-tagline.cyan { color: var(--cyan); }
+
+  .ai-cat-scene {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 46px;
+  }
+
+  .ai-cat-img {
+    width: 50px; height: 50px;
+    object-fit: contain;
+    object-position: top center;
+    filter: drop-shadow(0 0 8px rgba(0,240,255,0.5));
+    animation: catFloat 3.5s ease-in-out infinite;
+    animation-delay: 0.5s;
+    transform: scaleX(-1);
+  }
+
+  .neural-nodes { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+
+  .nn-node {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(0,240,255,0.12);
+    border: 1.5px solid rgba(0,240,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    animation: nodePulse 2s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(0,240,255,0.2);
+  }
+
+  .nn-node:nth-child(2) { animation-delay: 0.4s; background: rgba(139,0,255,0.12); border-color: rgba(139,0,255,0.4); }
+  .nn-node:nth-child(3) { animation-delay: 0.8s; }
+
+  @keyframes nodePulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(0,240,255,0.2); }
+    50% { box-shadow: 0 0 14px rgba(0,240,255,0.5); }
+  }
+
+  .rwa-cat-scene {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    margin-left: 46px;
+  }
+
+  .rwa-cat-img {
+    width: 42px; height: 42px;
+    object-fit: contain;
+    object-position: top center;
+    filter: drop-shadow(0 0 8px rgba(255,215,0,0.5));
+    animation: catFloat 4s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  .asset-tokens { display: flex; gap: 5px; }
+
+  .asset-chip {
+    background: rgba(255,215,0,0.1);
+    border: 1px solid rgba(255,215,0,0.3);
+    color: var(--gold);
+    font-size: 8px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .ecosystem-section {
+    position: relative;
+    z-index: 2;
+    padding: 0 36px 24px;
+  }
+
+  .ecosystem-visual {
+    background: rgba(8,10,24,0.85);
+    border: 1px solid rgba(139,0,255,0.2);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .eco-nodes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .eco-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .eco-node-circle {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  .eco-node-circle.defi {
+    background: radial-gradient(circle, rgba(139,0,255,0.2), rgba(139,0,255,0.05));
+    border: 2px solid rgba(139,0,255,0.5);
+    box-shadow: 0 0 20px rgba(139,0,255,0.3);
+  }
+
+  .eco-node-circle.rwa {
+    background: radial-gradient(circle, rgba(255,215,0,0.15), rgba(255,215,0,0.03));
+    border: 2px solid rgba(255,215,0,0.4);
+    box-shadow: 0 0 20px rgba(255,215,0,0.2);
+  }
+
+  .eco-node-circle.ai {
+    background: radial-gradient(circle, rgba(0,240,255,0.15), rgba(0,240,255,0.03));
+    border: 2px solid rgba(0,240,255,0.4);
+    box-shadow: 0 0 20px rgba(0,240,255,0.25);
+  }
+
+  .eco-node-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .eco-connections {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .eco-tagline {
+    text-align: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #8B00FF, #FF00CC, #00F0FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 8px rgba(139,0,255,0.4));
+    margin-bottom: 4px;
+  }
+
+  .eco-sub {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.06em;
+  }
+
+  .paw-trail {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    margin: 14px 0 0;
+    opacity: 0.25;
+  }
+
+  .paw { font-size: 12px; animation: pawFade 2s ease-in-out infinite; }
+  .paw:nth-child(2) { animation-delay: 0.3s; }
+  .paw:nth-child(3) { animation-delay: 0.6s; }
+  .paw:nth-child(4) { animation-delay: 0.9s; }
+  .paw:nth-child(5) { animation-delay: 1.2s; }
+
+  @keyframes pawFade {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.7; }
+  }
+
+  .blocks-section {
+    position: relative;
+    z-index: 2;
+    padding: 0 36px 20px;
+  }
+
+  .blocks-scene {
+    background: rgba(8,10,24,0.85);
+    border: 1px solid rgba(0,240,255,0.15);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .block-stack-cats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .block-cat-img {
+    width: 46px; height: 46px;
+    object-fit: contain;
+    object-position: top center;
+    filter: drop-shadow(0 0 8px rgba(139,0,255,0.5));
+    animation: catFloat 3s ease-in-out infinite;
+  }
+
+  .block-cat-img.second {
+    animation-delay: 1s;
+    animation-duration: 3.8s;
+    transform: scaleX(-1);
+  }
+
+  .liq-blocks { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+
+  .liq-block {
+    height: 18px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    animation: blockGlow 2.5s ease-in-out infinite;
+  }
+
+  .liq-block:nth-child(1) { background: rgba(139,0,255,0.15); border: 1px solid rgba(139,0,255,0.4); color: #CC66FF; width: 100%; }
+  .liq-block:nth-child(2) { background: rgba(0,240,255,0.1); border: 1px solid rgba(0,240,255,0.3); color: var(--cyan); width: 80%; animation-delay: 0.4s; }
+  .liq-block:nth-child(3) { background: rgba(255,0,204,0.1); border: 1px solid rgba(255,0,204,0.3); color: #FF66E8; width: 60%; animation-delay: 0.8s; }
+
+  @keyframes blockGlow {
+    0%, 100% { box-shadow: none; }
+    50% { box-shadow: 0 0 10px rgba(139,0,255,0.3); }
+  }
+
+  .blocks-stat { text-align: right; flex-shrink: 0; }
+
+  .blocks-stat-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cyan);
+    text-shadow: 0 0 10px rgba(0,240,255,0.6);
+    line-height: 1;
+  }
+
+  .blocks-stat-label {
+    font-size: 8px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .footer-section {
+    position: relative;
+    z-index: 2;
+    padding: 16px 36px 28px;
+    border-top: 1px solid rgba(139,0,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .footer-mantle { display: flex; align-items: center; gap: 7px; }
+
+  .footer-mark { width: 22px; height: 22px; opacity: 0.7; }
+
+  .footer-text {
+    font-size: 9px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .footer-text strong { color: rgba(255,255,255,0.6); display: block; }
+
+  .footer-cat {
+    width: 44px; height: 44px;
+    object-fit: contain;
+    object-position: top center;
+    filter: drop-shadow(0 0 8px rgba(139,0,255,0.4));
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+<div class="infographic">
+  <div class="grid-bg"></div>
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="blob3"></div>
+  <div class="blob4"></div>
+
+  <div class="hero">
+    <div class="hero-top-bar">
+      <div class="mantle-logo-wrap">
+        <svg class="mantle-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(50,50)">
+            <rect x="-5" y="-46" width="9" height="20" rx="2" fill="#62EBA8" transform="rotate(0)"/>
+            <rect x="-4" y="-44" width="7" height="14" rx="1.5" fill="#62EBA8" transform="rotate(18)" opacity="0.85"/>
+            <rect x="-5" y="-46" width="9" height="22" rx="2" fill="#9EFFD0" transform="rotate(36)"/>
+            <rect x="-4" y="-40" width="7" height="12" rx="1.5" fill="#62EBA8" transform="rotate(54)" opacity="0.7"/>
+            <rect x="-5" y="-46" width="9" height="24" rx="2" fill="#62EBA8" transform="rotate(72)"/>
+            <rect x="-4" y="-38" width="7" height="10" rx="1.5" fill="#9EFFD0" transform="rotate(90)" opacity="0.6"/>
+            <rect x="-5" y="-46" width="9" height="26" rx="2" fill="#62EBA8" transform="rotate(108)"/>
+            <rect x="-4" y="-42" width="7" height="13" rx="1.5" fill="#62EBA8" transform="rotate(126)" opacity="0.75"/>
+            <rect x="-5" y="-46" width="9" height="20" rx="2" fill="#9EFFD0" transform="rotate(144)"/>
+            <rect x="-4" y="-40" width="7" height="11" rx="1.5" fill="#62EBA8" transform="rotate(162)" opacity="0.65"/>
+            <rect x="-5" y="-46" width="9" height="18" rx="2" fill="#62EBA8" transform="rotate(180)"/>
+            <rect x="-4" y="-44" width="7" height="15" rx="1.5" fill="#9EFFD0" transform="rotate(198)" opacity="0.8"/>
+            <rect x="-5" y="-46" width="9" height="22" rx="2" fill="#62EBA8" transform="rotate(216)"/>
+            <rect x="-4" y="-38" width="7" height="10" rx="1.5" fill="#62EBA8" transform="rotate(234)" opacity="0.6"/>
+            <rect x="-5" y="-46" width="9" height="24" rx="2" fill="#9EFFD0" transform="rotate(252)"/>
+            <rect x="-4" y="-42" width="7" height="12" rx="1.5" fill="#62EBA8" transform="rotate(270)" opacity="0.7"/>
+            <rect x="-5" y="-46" width="9" height="20" rx="2" fill="#62EBA8" transform="rotate(288)"/>
+            <rect x="-4" y="-40" width="7" height="11" rx="1.5" fill="#9EFFD0" transform="rotate(306)" opacity="0.65"/>
+            <rect x="-5" y="-46" width="9" height="26" rx="2" fill="#62EBA8" transform="rotate(324)"/>
+            <rect x="-4" y="-38" width="7" height="9" rx="1.5" fill="#62EBA8" transform="rotate(342)" opacity="0.55"/>
+            <circle cx="0" cy="0" r="14" fill="#0D1F14"/>
+            <circle cx="0" cy="0" r="10" fill="#1A3327"/>
+          </g>
+        </svg>
+        <span class="mantle-wordmark">MANTLE</span>
+      </div>
+      <div class="cat-hero-wrap">
+        <div class="cat-glow-ring"></div>
+        <img class="cat-hero-img" src="Screenshot_2026-05-01_104336-removebg-preview.png" alt="Mantle Intern Cat" />
+        <div class="badge">Intern Cat</div>
+      </div>
+    </div>
+    <div class="hero-title">The Liquidity<br><span class="grad">Chain Awakening</span></div>
+    <div class="hero-subtitle">
+      Distribution Layer Connecting <strong>TradFi &amp; On-Chain Liquidity</strong><br>
+      Q1 2026 Momentum Report
+    </div>
+    <div class="marathon-pill">
+      <span class="dot"></span>
+      Mantle Spring Creative Marathon 2026
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="divider-line"></div>
+    <span class="divider-label">// explosive growth</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="metrics-section">
+    <div class="section-heading">Q1 2026 Milestones</div>
+    <div class="growth-visual">
+      <div class="cat-arrow-scene">
+        <svg class="arrow-svg arrow-trajectory" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#8B00FF" stop-opacity="0.6"/>
+              <stop offset="50%" stop-color="#FF00CC" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#00F0FF" stop-opacity="1"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <path d="M 10 55 Q 80 50 140 42 Q 200 35 260 25 Q 310 16 360 5" stroke="url(#arrowGrad)" stroke-width="2.5" fill="none" filter="url(#glow)"/>
+          <polygon points="360,5 350,12 355,5 350,-2" fill="#00F0FF" filter="url(#glow)"/>
+          <path d="M 10 55 Q 80 50 140 42 Q 200 35 260 25 Q 310 16 360 5 L 360 60 L 10 60 Z" fill="url(#arrowGrad)" opacity="0.08"/>
+          <circle cx="80" cy="49" r="3" fill="#8B00FF" opacity="0.8"/>
+          <circle cx="180" cy="36" r="3" fill="#FF00CC" opacity="0.8"/>
+          <circle cx="300" cy="17" r="3" fill="#00F0FF" opacity="0.9"/>
+        </svg>
+        <div class="cat-on-arrow">
+          <img src="Screenshot_2026-05-01_104336-removebg-preview.png" alt="Cat riding growth" />
+        </div>
+        <div class="boost-label">🚀 +230% TVL</div>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-card purple">
+          <div class="metric-icon">💧</div>
+          <div class="metric-label">DeFi TVL</div>
+          <div class="metric-value purple">$755M</div>
+          <div class="metric-sub">Total Value Locked</div>
+          <div class="metric-badge up">↑ +230% / 6mo</div>
+        </div>
+        <div class="metric-card cyan">
+          <div class="metric-icon">🏛️</div>
+          <div class="metric-label">Aave on Mantle</div>
+          <div class="metric-value cyan">$1.34B</div>
+          <div class="metric-sub">Total market size</div>
+          <div class="metric-badge">3rd Globally 🌍</div>
+        </div>
+        <div class="metric-card gold">
+          <div class="metric-icon">🏦</div>
+          <div class="metric-label">Mantle Vault</div>
+          <div class="metric-value gold">$200M+</div>
+          <div class="metric-sub">Vault TVL</div>
+          <div class="metric-badge up">↑ ATH</div>
+        </div>
+        <div class="metric-card magenta">
+          <div class="metric-icon">💵</div>
+          <div class="metric-label">Stablecoins</div>
+          <div class="metric-value magenta">$955M</div>
+          <div class="metric-sub">Market cap</div>
+          <div class="metric-badge up">↑ All-Time High</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blocks-section">
+    <div class="blocks-scene">
+      <div class="block-stack-cats">
+        <img class="block-cat-img" src="Screenshot_2026-05-01_104336-removebg-preview.png" alt="Cat stacking blocks"/>
+        <img class="block-cat-img second" src="Screenshot_2026-05-01_104336-removebg-preview.png" alt="Cat stacking blocks"/>
+      </div>
+      <div class="liq-blocks">
+        <div class="liq-block">AAVE DEPOSITS +$1B</div>
+        <div class="liq-block">MANTLE VAULT LAYER</div>
+        <div class="liq-block">STABLECOIN RAILS</div>
+      </div>
+      <div class="blocks-stat">
+        <div class="blocks-stat-val">$1B+</div>
+        <div class="blocks-stat-label">Deposits<br>in weeks</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="divider-line"></div>
+    <span class="divider-label">// core pillars</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="pillars-section">
+    <div class="section-heading">Architecture of Innovation</div>
+
+    <div class="pillar-card arch">
+      <div class="pillar-header">
+        <div class="pillar-icon-title">
+          <div class="pillar-icon arch">🛡️</div>
+          <div class="pillar-title">Modular Architecture</div>
+        </div>
+        <span class="pillar-tag purple">ZK Rollup</span>
+      </div>
+      <div class="pillar-desc">ZK Rollup + Ethereum Blobs DA delivering next-gen throughput and cost efficiency with Ethereum-grade security guarantees.</div>
+      <div class="pillar-tagline purple">⚡ Faster. Cheaper. More Scalable.</div>
+    </div>
+
+    <div class="pillar-card rwa">
+      <div class="pillar-header">
+        <div class="pillar-icon-title">
+          <div class="pillar-icon rwa">📈</div>
+          <div class="pillar-title">RWA &amp; xStocks Revolution</div>
+        </div>
+        <span class="pillar-tag gold">LIVE</span>
+      </div>
+      <div class="pillar-desc">Tokenized equities live with Bybit. Stocks, gold, and real-world assets now trade 24/7 on-chain with TradFi-grade liquidity.</div>
+      <div class="pillar-tagline gold">🌐 24/7 TradFi Liquidity On-Chain</div>
+      <div class="rwa-cat-scene">
+        <img class="rwa-cat-img" src="Screenshot_2026-05-01_104336-removebg-preview.png" alt="Cat herding assets"/>
+        <div class="asset-tokens">
+          <span class="asset-chip">xAAPL</span>
+          <span class="asset-chip">xGOLD</span>
+          <span class="asset-chip">xETH</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-card ai">
+      <div class="pillar-header">
+        <div class="pillar-icon-title">
+          <div class="pillar-icon ai-ic">🤖</div>
+          <div class="pillar-title">AI Agent Economy</div>
+        </div>
+        <span class="pillar-tag">ERC-8183</span>
+      </div>
+      <div class="pillar-desc">Skills &amp; scaffolds for autonomous agents. Agentic commerce, on-chain AI reasoning, and ERC-8183 — a new primitive for machine intelligence.</div>
+      <div class="pillar-tagline cyan">🧠 Autonomous On-Chain Future</div>
+      <div class="ai-cat-scene">
+        <img class="ai-cat-img" src="Screenshot_2026-05-01_104336-removebg-preview.png" alt="Cat with AI nodes"/>
+        <div class="neural-nodes">
+          <div class="nn-node">⬡</div>
+          <div class="nn-node">⬡</div>
+          <div class="nn-node">⬡</div>
+          <div class="nn-node">⬡</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="divider-line"></div>
+    <span class="divider-label">// ecosystem vision</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="ecosystem-section">
+    <div class="ecosystem-visual">
+      <div class="eco-nodes">
+        <svg class="eco-connections" viewBox="0 0 528 80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="connGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#8B00FF"/>
+              <stop offset="100%" stop-color="#00F0FF"/>
+            </linearGradient>
+            <linearGradient id="connGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00F0FF"/>
+              <stop offset="100%" stop-color="#FFD700"/>
+            </linearGradient>
+            <filter id="lineGlow">
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <line x1="80" y1="40" x2="264" y2="40" stroke="url(#connGrad1)" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7" filter="url(#lineGlow)"/>
+          <line x1="264" y1="40" x2="448" y2="40" stroke="url(#connGrad2)" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7" filter="url(#lineGlow)"/>
+          <circle r="4" fill="#8B00FF" opacity="0.9" filter="url(#lineGlow)">
+            <animateMotion dur="2s" repeatCount="indefinite" path="M 80,40 L 264,40"/>
+          </circle>
+          <circle r="4" fill="#00F0FF" opacity="0.9" filter="url(#lineGlow)">
+            <animateMotion dur="2.5s" repeatCount="indefinite" path="M 264,40 L 448,40"/>
+          </circle>
+        </svg>
+        <div class="eco-node">
+          <div class="eco-node-circle defi">💧</div>
+          <div class="eco-node-label">DeFi</div>
+        </div>
+        <div class="eco-node">
+          <div class="eco-node-circle rwa">📊</div>
+          <div class="eco-node-label">RWAs</div>
+        </div>
+        <div class="eco-node">
+          <div class="eco-node-circle ai">🤖</div>
+          <div class="eco-node-label">AI Agents</div>
+        </div>
+      </div>
+      <div class="eco-tagline">Building the Liquidity Chain<br>of the Future</div>
+      <div class="eco-sub">Mantle: Where TradFi meets DeFi meets Autonomous Intelligence</div>
+      <div class="paw-trail">
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-section">
+    <div class="footer-mantle">
+      <svg class="footer-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(50,50)">
+          <rect x="-4" y="-42" width="7" height="18" rx="1.5" fill="#62EBA8" transform="rotate(0)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="22" rx="1.5" fill="#62EBA8" transform="rotate(36)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="16" rx="1.5" fill="#62EBA8" transform="rotate(72)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="24" rx="1.5" fill="#62EBA8" transform="rotate(108)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="18" rx="1.5" fill="#62EBA8" transform="rotate(144)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="20" rx="1.5" fill="#62EBA8" transform="rotate(180)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="16" rx="1.5" fill="#62EBA8" transform="rotate(216)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="22" rx="1.5" fill="#62EBA8" transform="rotate(252)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="18" rx="1.5" fill="#62EBA8" transform="rotate(288)" opacity="0.7"/>
+          <rect x="-4" y="-42" width="7" height="14" rx="1.5" fill="#62EBA8" transform="rotate(324)" opacity="0.7"/>
+          <circle cx="0" cy="0" r="10" fill="#0D1F14"/>
+        </g>
+      </svg>
+      <div class="footer-text">
+        <strong>Mantle Spring Creative Marathon 2026</strong>
+        Designed by @EbubechukwuNick
+      </div>
+    </div>
+    <img class="footer-cat" src="Screenshot_2026-05-01_104336-removebg-preview.png" alt="Mantle Intern Cat"/>
+  </div>
+</div>
+</body>
+</html>
